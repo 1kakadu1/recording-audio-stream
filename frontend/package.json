@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -22,13 +23,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.ts src/**/*.tsx",
+    "lint:fix": "prettier --write . && eslint src/**/*.ts src/**/*.tsx . --fix",
+    "format:check": "npx prettier --list-different --ignore-path=.gitignore .prettierignore \"**/*.ts(x)?\"",
+    "format:fix": "npx prettier --list-different --ignore-path=.gitignore .prettierignore \"**/*.ts(x)?\" --write",
+    "pre-commit": "npm run format:fix && npm run format:check && npm run build",
+    "nc": "hygen new component",
+    "nci": "hygen new icon",
+    "ncp": "hygen new page",
+    "nctx": "hygen new context"
   },
   "browserslist": {
     "production": [
@@ -41,5 +45,25 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@cspell/dict-ru_ru": "^2.3.2",
+    "@cspell/eslint-plugin": "^9.3.2",
+    "@eslint/eslintrc": "^3.3.3",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-unicorn": "^62.0.0",
+    "eslint-plugin-unused-imports": "^4.3.0",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "hygen": "^6.2.11",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.3",
+    "react-tooltip": "^5.30.0",
+    "sass": "^1.94.2"
   }
 }

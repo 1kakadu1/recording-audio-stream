@@ -1,0 +1,177 @@
+// colors. !!!! Outdated. We add variables to vars.css. Necessary for mixins remains in this file !!!!
+
+// end colors
+
+$maxWidthContainer: 1280;
+$maxWidth: 1920;
+$weight: (100, 200, 300, 400, 500, 600, 700, 800, 900);
+$min-mobile-big: 575px;
+$min-tablet: 768px;
+$min-tablet-big: 1024px;
+$min-desktop: 1280px;
+$min-laptop: 1440px;
+
+@mixin adaptive-var($property, $startSize, $minSize, $type) {
+	$addSize: $startSize - $minSize;
+	@if $type == 1 {
+		#{$property}: $startSize + px;
+		@media (max-width: #{$maxWidthContainer + px}) {
+			#{$property}: calc(
+				#{$minSize + px} + #{$addSize} *
+					((100vw - 320px) /#{$maxWidthContainer - 320})
+			);
+		}
+	} @else if $type == 2 {
+		#{$property}: $startSize + px;
+		@media (min-width: #{$maxWidthContainer + px}) {
+			#{$property}: calc(
+				#{$minSize + px} + #{$addSize} * ((100vw - 320px) /#{$maxWidth - 320})
+			);
+		}
+	} @else {
+		#{$property}: calc(
+			#{$minSize + px} + #{$addSize} * ((100vw - 320px) /#{$maxWidth - 320})
+		);
+	}
+}
+
+@mixin toRemProp($property, $value) {
+	#{$property}: ($value / 16) + rem;
+}
+
+@mixin toViewportProp($property, $value, $type: vw) {
+	#{$property}: (($value / $maxWidth) * 100) + $type;
+}
+
+@mixin fontSize($valueMin, $valueMax) {
+	font-size: clamp(
+		#{toRem($valueMin)},
+		#{toViewport($valueMax)},
+		#{toRem($valueMax)}
+	);
+}
+
+@mixin clamp($property, $valueMin, $valueMax, $type: em) {
+	#{$property}: clamp(
+		#{toResponseSize($valueMin, $type)},
+		#{toViewport($valueMax)},
+		#{toResponseSize($valueMax, $type)}
+	);
+}
+
+@function toResponseSize($value, $type: em) {
+	$remValue: calc($value / 16);
+	@return $remValue + $type;
+}
+
+@function toRem($value) {
+	$remValue: calc($value / 16);
+	@return $remValue + rem;
+}
+
+@function toEm($value) {
+	$remValue: calc($value / 16);
+	@return $remValue + em;
+}
+
+@function toViewport($value, $type: vw) {
+	$div: calc($value / $maxWidth); //(($value / $maxWidth)*100) + $type;
+	$value: calc($div * 100) + $type;
+	@return $value;
+}
+
+@mixin min-mobile-big {
+	@media screen and (width >= $min-mobile-big) {
+		@content;
+	}
+}
+
+@mixin min-tablet {
+	@media screen and (width >= $min-tablet) {
+		@content;
+	}
+}
+
+@mixin min-tablet-big {
+	@media screen and (width >= $min-tablet-big) {
+		@content;
+	}
+}
+
+@mixin min-desktop {
+	@media screen and (width >= $min-desktop) {
+		@content;
+	}
+}
+
+@mixin min-laptop {
+	@media screen and (width >= $min-laptop) {
+		@content;
+	}
+}
+
+@mixin min-width($width) {
+	@media screen and (min-width: $width) {
+		@content;
+	}
+}
+
+@mixin max-width($width) {
+	@media screen and (max-width: $width) {
+		@content;
+	}
+}
+
+@mixin max-tablet {
+	@media screen and (width < $min-tablet) {
+		@content;
+	}
+}
+
+@mixin max-mobile-big {
+	@media screen and (width < $min-mobile-big) {
+		@content;
+	}
+}
+
+@mixin max-tablet-big {
+	@media screen and (width < $min-tablet-big) {
+		@content;
+	}
+}
+
+@mixin max-desktop {
+	@media screen and (width < $min-desktop) {
+		@content;
+	}
+}
+
+@mixin hover() {
+	@media (hover: hover) {
+		&:hover {
+			@content;
+		}
+	}
+}
+
+@mixin ellipsis($line) {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: $line;
+	-webkit-box-orient: vertical;
+}
+//TODO: СДЕЛАТЬ ОТДЕЛЬНЫЕ ПЕРЕМЕННЫЕ В vars
+@mixin scrollbar($width: 6px, $thumb_bg: var(--gray), $track_bg: var(--white)) {
+	&::-webkit-scrollbar {
+		width: $width;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: $track_bg;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $thumb_bg;
+		border-radius: 6px;
+	}
+}

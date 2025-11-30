@@ -1,0 +1,61 @@
+/* LIGHT THEME */
+:root {
+	/* BASE */
+	--blue: #006df8;
+	--light-blue: #019fcc;
+	--light-blue-02: rgba(1, 159, 204, 0.2);
+	--dark: #000;
+	--dark-blue: #014b62;
+	--background: #fff;
+	--background-secondary: #f7f7f7;
+	--footer: #333;
+	--white: #fff;
+	--gray: #ccc;
+	--gray-secondary: #999;
+	--blue-08: rgba(1, 159, 204, 0.08);
+	--blue-light-80: rgba(21, 87, 132, 0.8);
+	--primary: #333;
+	--primary-hover: #696a75;
+	--secondary: var(--dark-blue);
+	--secondary-hover: #696a75;
+	--disabled: rgba(0, 0, 0, 0.32);
+	--error: #f70c72;
+	--red: red;
+	--light: #eee;
+	--icon: var(--dark-blue);
+	--icon-hover: var(--light-blue);
+	--active: #f70c72;
+	--text: var(--primary);
+	--text-text-secondary: #616161;
+	--text-accent: #004f6d;
+	--text-secondary: var(--gray-secondary);
+	--hr: var(--light-blue);
+	--link: #333;
+	--hover: #019fcc;
+	--modal: var(--white);
+	--overlay: rgba(0, 0, 0, 0.3);
+	--z-index-header: 2000;
+	--header-height: 68px;
+	--header-too-height: 0px;
+	--mobile-product-action-height: 80px;
+	--yellow: #ffba08;
+	--surface-light: #fafafa;
+	/* END BASE */
+	/* BTN */
+	--btn: var(--dark-blue);
+	--btn-text: var(--white);
+	--btn-hover: var(--dark-blue);
+	--btn-disabled: var(--dark-blue);
+	/*---------*/
+	/* END BTNS */
+	/* INPUTS */
+	--input: var(--white);
+	--input-border: var(--white);
+	--input-label: var(--gray-secondary);
+	--input-placeholder: var(--gray-secondary);
+	--input-text: var(--primary);
+	/* END INPUTS */
+	/* marquee */
+	--marquee-bg: var(--primary);
+	--marquee-color: var(--white);
+}
