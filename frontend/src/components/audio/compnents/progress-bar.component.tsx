@@ -1,4 +1,4 @@
-import { IAudioProgressBarProps, IProgressCSSProps } from '../index.model';
+import { type IAudioProgressBarProps, type IProgressCSSProps } from '../index.model';
 
 export const ProgressBar = (props: IAudioProgressBarProps) => {
 	const { duration, currentProgress, buffered, ...rest } = props;

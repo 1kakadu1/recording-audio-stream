@@ -1,12 +1,12 @@
-import { AnchorHTMLAttributes, HTMLAttributes } from 'react';
+import {type AnchorHTMLAttributes, type HTMLAttributes } from 'react';
 import {
-	RenderPropsType,
-	TypographyBaseProps,
-	TypographyElement,
-	TypographyElementColor,
-	TypographyElementFontSize,
-	TypographyElementLineHeight,
-	TypographyElementWeight,
+	type RenderPropsType,
+	type TypographyBaseProps,
+	type TypographyElement,
+	type TypographyElementColor,
+	type TypographyElementFontSize,
+	type TypographyElementLineHeight,
+	type TypographyElementWeight,
 } from './typography.model';
 import cl from './typography.module.scss';
 

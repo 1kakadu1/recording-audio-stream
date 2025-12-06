@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef } from 'react';
-import { IModalProps } from './modal.model';
+import { type IModalProps } from './modal.model';
 import { CloseIcon } from '../icons';
 import { PortalWrapper } from '../portal-wrapper/portal-wrapper.container';
 import cl from './modal.module.scss';

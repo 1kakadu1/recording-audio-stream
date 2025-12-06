@@ -1,7 +1,5 @@
-'use client';
-
-import React, { Ref, forwardRef, useId } from 'react';
-import { IInputDefaultProps } from './input-field.model';
+import {type  Ref, forwardRef, useId } from 'react';
+import { type IInputDefaultProps } from './input-field.model';
 import cl from './input-field.module.scss';
 
 export const InputField = forwardRef(

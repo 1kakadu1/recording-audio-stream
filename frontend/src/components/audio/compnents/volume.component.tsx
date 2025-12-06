@@ -1,4 +1,4 @@
-import { IVolumeCSSProps, IVolumeProps } from '../index.model';
+import { type IVolumeCSSProps, type IVolumeProps } from '../index.model';
 
 export const Volume = (props: IVolumeProps) => {
 	const volumeStyles: IVolumeCSSProps = {

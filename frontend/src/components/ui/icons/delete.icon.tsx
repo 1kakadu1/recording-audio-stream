@@ -1,5 +1,5 @@
-import { ForwardedRef, forwardRef } from 'react';
-import { ISvgIconProps } from '.';
+import { forwardRef, type ForwardedRef } from 'react';
+import type { ISvgIconProps } from '.';
 
 export const DeleteIcon = forwardRef(
 	(props: ISvgIconProps, ref: ForwardedRef<SVGSVGElement>) => {

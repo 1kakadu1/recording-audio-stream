@@ -1,8 +1,8 @@
 ---
 to: <%= absPath %><%= folder_name %>.icon.tsx
 ---
-import { ForwardedRef, forwardRef } from 'react';
-import { ISvgIconProps } from '.';
+import { forwardRef, type ForwardedRef } from 'react';
+import type { ISvgIconProps } from '.';
 
 export const <%= `${component_name}Icon` %> = forwardRef(
     (props: ISvgIconProps, ref: ForwardedRef<SVGSVGElement>) => {

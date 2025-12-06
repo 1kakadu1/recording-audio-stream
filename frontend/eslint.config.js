@@ -1,15 +1,17 @@
-import js from "@eslint/js";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
-import ts from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
-import unusedImports from "eslint-plugin-unused-imports";
-import cspellEslintPlugin from "@cspell/eslint-plugin";
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import prettier from "eslint-plugin-prettier";
-import globals from "globals";
+import cspellEslintPlugin from "@cspell/eslint-plugin";
+import unusedImports from "eslint-plugin-unused-imports";
 
-export default [
+export default defineConfig([
+  globalIgnores(['dist']),
   {
+    files: ['**/*.{ts,tsx}'],
     ignores: [
       ".prettierrc",
       ".lintstagedrc.js",
@@ -26,58 +28,18 @@ export default [
       "package-lock.json",
       "package.json",
       "src/mock/*"
-    ]
-  },
-
- {
+    ],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
     languageOptions: {
-      globals: {
-        React: "readonly",
-        JSX: "readonly",
-        HTMLAudioElement: "readonly",
-        ...globals.browser
-      }
-    }
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
   },
-
-  // Основные правила JS
-  js.configs.recommended,
-
-  // TypeScript
-  {
-    files: ["**/*.ts", "**/*.tsx"],
-    languageOptions: {
-      parser: tsParser
-    },
-    plugins: {
-      "@typescript-eslint": ts
-    },
-    rules: {
-      ...ts.configs.recommended.rules
-    }
-  },
-
-  // React
-  {
-    files: ["**/*.jsx", "**/*.tsx"],
-    plugins: {
-      react,
-      "react-hooks": reactHooks
-    },
-    languageOptions: {
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true
-        }
-      }
-    },
-    rules: {
-      ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off"
-    }
-  },
-
   // Prettier
   {
     plugins: { prettier },
@@ -120,4 +82,4 @@ export default [
       "no-debugger": "off"
     }
   }
-];
+])

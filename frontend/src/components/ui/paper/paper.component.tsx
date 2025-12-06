@@ -1,4 +1,4 @@
-import { IPaperProps } from './paper.model';
+import { type IPaperProps } from './paper.model';
 import cl from './paper.module.scss';
 
 export const Paper = ({

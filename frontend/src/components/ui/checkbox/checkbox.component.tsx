@@ -1,5 +1,5 @@
-import { Ref, forwardRef } from 'react';
-import { ICheckboxProps } from './checkbox.model';
+import { type Ref, forwardRef } from 'react';
+import { type ICheckboxProps } from './checkbox.model';
 import cl from './checkbox.module.scss';
 
 export const Checkbox = forwardRef(

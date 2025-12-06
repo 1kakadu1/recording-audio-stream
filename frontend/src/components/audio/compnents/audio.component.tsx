@@ -1,7 +1,7 @@
-import { ChangeEvent, useEffect, useId, useRef, useState } from 'react';
+import { type ChangeEvent, useEffect, useId, useRef, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
-import { IAudioProps } from '../index.model';
-import { DotsHorizontalIcon } from '../../../components/ui/icons';
+import { type IAudioProps } from '../index.model';
+import { DotsHorizontalIcon } from '../../ui/icons';
 import { ProgressBar } from './progress-bar.component';
 import { TimeAudio } from './time.component';
 import { Volume } from './volume.component';
