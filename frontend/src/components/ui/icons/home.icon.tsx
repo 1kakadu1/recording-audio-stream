@@ -1,4 +1,4 @@
-import { forwardRef, type ForwardedRef } from 'react';
+import { type ForwardedRef, forwardRef } from 'react';
 import type { ISvgIconProps } from '.';
 
 export const HomeIcon = forwardRef(

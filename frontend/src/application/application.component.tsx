@@ -1,6 +1,7 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HomePage } from '@/pages/home';
 import { AboutPage } from '@/pages/about';
+import { HomePage } from '@/pages/home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 //import { HomePage } from '@/pages/home';
 function Application() {
 	return (

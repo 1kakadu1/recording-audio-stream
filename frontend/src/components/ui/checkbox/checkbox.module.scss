@@ -1,3 +1,5 @@
+//@use "../../../styles/mixin";
+
 .checkbox-label {
 	display: flex;
 	align-items: center;
@@ -11,12 +13,12 @@
 			font-weight: 400;
 		}
 	}
-	@include hover {
-		.checkbox-label-text {
-			transition: color 400ms ease;
-			color: var(--hover);
-		}
-	}
+	// @include hover {
+	// 	.checkbox-label-text {
+	// 		transition: color 400ms ease;
+	// 		color: var(--hover);
+	// 	}
+	// }
 }
 
 .checkbox-input {

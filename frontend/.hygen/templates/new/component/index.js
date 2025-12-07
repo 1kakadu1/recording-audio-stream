@@ -38,16 +38,17 @@ module.exports = {
               return item.replace(/^[a-z]/, function(m){ return m.toUpperCase() })
             }).join("");
           }
+          console.log("LOGS",dir);
           const path = `${ dir ? `${dir}/` : `` }${folder_name}`
           if(path.includes("ui/")){
             const exportString = `\nexport * from './${folder_name}';`;
-            const filePath = pathNode.resolve('src/components/ui/index.ts');
+            const filePath = pathNode.resolve('../src/components/ui/index.ts');
             let fileContent = fs.readFileSync(filePath, 'utf8');
             fileContent += exportString;
             fs.writeFileSync(filePath, fileContent, 'utf8');
             console.log(`Экспорт для ${name} успешно добавлен в ui -> index.ts`);
           }
-          const absPath = `src/components/${path}`
+          const absPath = `../src/components/${path}`
           return { ...answers, path, absPath, category, component_name: name, is_create_model }
         })
     }

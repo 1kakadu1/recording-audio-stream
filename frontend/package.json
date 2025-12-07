@@ -12,10 +12,9 @@
     "format:check": "npx prettier --list-different --ignore-path=.gitignore .prettierignore \"**/*.ts(x)?\"",
     "format:fix": "npx prettier --list-different --ignore-path=.gitignore .prettierignore \"**/*.ts(x)?\" --write",
     "pre-commit": "npm run format:fix && npm run format:check && npm run build",
-    "nc": "hygen new component",
-    "nci": "hygen new icon",
-    "ncp": "hygen new page",
-    "nctx": "hygen new context"
+    "nc": "cd .hygen && hygen new component",
+    "nci": "cd .hygen && hygen new icon",
+    "nctx": "cd .hygen && hygen new context"
   },
   "dependencies": {
     "react": "^19.2.0",

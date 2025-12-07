@@ -5,9 +5,10 @@
 	--light-blue: #019fcc;
 	--light-blue-02: rgba(1, 159, 204, 0.2);
 	--dark: #000;
+	--ds-dark: hsla( 0, 0%, 4%);
 	--dark-blue: #014b62;
-	--background: #fff;
-	--background-secondary: #f7f7f7;
+	--background: var(--dark);
+	--background-secondary: var(--ds-dark);
 	--footer: #333;
 	--white: #fff;
 	--gray: #ccc;
@@ -29,7 +30,7 @@
 	--text-text-secondary: #616161;
 	--text-accent: #004f6d;
 	--text-secondary: var(--gray-secondary);
-	--hr: var(--light-blue);
+	--hr: #fafafa;
 	--link: #333;
 	--hover: #019fcc;
 	--modal: var(--white);
@@ -40,6 +41,8 @@
 	--mobile-product-action-height: 80px;
 	--yellow: #ffba08;
 	--surface-light: #fafafa;
+	--header: var(--background-secondary);
+	--height-header: 60px;
 	/* END BASE */
 	/* BTN */
 	--btn: var(--dark-blue);

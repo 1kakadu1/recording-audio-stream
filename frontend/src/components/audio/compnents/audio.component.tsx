@@ -1,10 +1,10 @@
 import { type ChangeEvent, useEffect, useId, useRef, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { type IAudioProps } from '../index.model';
-import { DotsHorizontalIcon } from '../../ui/icons';
 import { ProgressBar } from './progress-bar.component';
 import { TimeAudio } from './time.component';
 import { Volume } from './volume.component';
+import { DotsHorizontalIcon } from '../../ui/icons';
 import { formatDurationDisplay } from '../utils';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 

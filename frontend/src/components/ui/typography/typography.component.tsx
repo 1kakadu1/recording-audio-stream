@@ -1,4 +1,4 @@
-import {type AnchorHTMLAttributes, type HTMLAttributes } from 'react';
+import { type AnchorHTMLAttributes, type HTMLAttributes } from 'react';
 import {
 	type RenderPropsType,
 	type TypographyBaseProps,

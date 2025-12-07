@@ -24,9 +24,9 @@ module.exports = {
               return item.replace(/^[a-z]/, function(m){ return m.toUpperCase() })
           }).join("");
 
-          const absPath = `src/components/ui/icons/`
+          const absPath = `../src/components/ui/icons/`
           const exportString = `\nexport * from './${folder_name}.icon';`;
-          const filePath = path.resolve('src/components/ui/icons/index.tsx');
+          const filePath = path.resolve('../src/components/ui/icons/index.tsx');
           let fileContent = fs.readFileSync(filePath, 'utf8');
           fileContent += exportString;
           fs.writeFileSync(filePath, fileContent, 'utf8');

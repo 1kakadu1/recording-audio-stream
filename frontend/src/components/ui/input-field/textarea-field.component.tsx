@@ -1,7 +1,7 @@
 'use client';
 
-import React, { Ref, forwardRef, useId } from 'react';
-import { ITextAreaProps } from './input-field.model';
+import { type Ref, forwardRef, useId } from 'react';
+import { type ITextAreaProps } from './input-field.model';
 import cl from './input-field.module.scss';
 
 export const TextAreaField = forwardRef(
