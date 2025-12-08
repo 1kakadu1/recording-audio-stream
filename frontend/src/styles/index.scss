@@ -10,6 +10,7 @@ body {
 	scroll-behavior: smooth;
 	background-color: var(--background);
 	transition: background-color 300ms ease;
+	color: var(--primary);
 }
 html,
 body,
@@ -65,13 +66,15 @@ video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-family: var(--font-inter-var);
 	vertical-align: baseline;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	text-size-adjust: none;
 	color: var(--primary);
 	-webkit-tap-highlight-color: transparent;
+	font-family: 'Nunito', sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
 }
 
 body:has(dialog[open]) {
@@ -176,7 +179,9 @@ input[type='number'] {
 	}
 }
 
-.container{
+.container {
 	width: 1280px;
-	padding: 0px 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin: 0 auto;
 }

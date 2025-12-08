@@ -141,6 +141,9 @@
 					padding: 21px 24px;
 				}
 			}
+			&:focus {
+				border-color: var(--gray);
+			}
 		}
 		&__input.big {
 			height: 48px;
@@ -150,64 +153,6 @@
 		}
 		&__textarea.big {
 			height: 142px;
-		}
-	}
-}
-.outline-gray {
-	.input-form-control {
-		&__label {
-			color: var(--input-label);
-		}
-		&-adornment__end {
-			color: var(--icon);
-		}
-		&__input,
-		&__textarea {
-			border: toRem(1) solid var(--input-outline-gray-border);
-			background-color: var(--input-outline-gray);
-			color: var(--input-text);
-			&::placeholder {
-				color: var(--input-outline-gray-placeholder);
-			}
-			&:disabled {
-				color: var(--input-outline-gray-text-disabled);
-				border: toRem(1) solid var(--input-outline-gray-border-disabled);
-				background-color: var(--input-outline-gray-disabled);
-				opacity: 0.5;
-			}
-			&.big {
-				padding: 21px 24px;
-				font-size: toRem(18);
-				&::placeholder {
-					color: var(--input-placeholder--big);
-				}
-			}
-		}
-		&__input.big {
-			height: 64px;
-		}
-		&__textarea.big {
-			height: 142px;
-		}
-	}
-}
-.outline.input-form-control {
-	.input-form-control {
-		&__input,
-		&__textarea {
-			border: toRem(2) solid var(--input-outline-border);
-			transition: all 300ms ease;
-			font-weight: 500;
-			&:focus,
-			&:focus-visible {
-				outline: none;
-				transition: all 300ms ease;
-				border: toRem(2) solid var(--input-outline-border-focus);
-			}
-			&::placeholder {
-				font-weight: 500;
-				color: var(--input-outline-placeholder);
-			}
 		}
 	}
 }

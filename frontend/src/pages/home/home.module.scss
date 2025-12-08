@@ -1,0 +1,17 @@
+.search {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: center;
+	gap: 8px;
+}
+
+.error {
+	color: var(--active);
+	font-size: toRem(18);
+}
+
+.audio__wrap {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}

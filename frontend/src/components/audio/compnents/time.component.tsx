@@ -6,6 +6,7 @@ export const TimeAudio = ({
 	duration: string;
 	currentTime: string;
 	isDuration?: boolean;
+	online?: boolean;
 }) => {
 	return (
 		<span className="audio-time">

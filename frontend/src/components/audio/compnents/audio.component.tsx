@@ -8,7 +8,13 @@ import { DotsHorizontalIcon } from '../../ui/icons';
 import { formatDurationDisplay } from '../utils';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 
-export const Audio = ({ src, title, onSetAudio, download }: IAudioProps) => {
+export const Audio = ({
+	src,
+	title,
+	onSetAudio,
+	download,
+	online = false,
+}: IAudioProps) => {
 	const id = useId();
 	const [isContentOverflow, setContentOverflow] = useState<boolean>(false);
 	const [isPlay, setPlay] = useState(false);
@@ -17,29 +23,35 @@ export const Audio = ({ src, title, onSetAudio, download }: IAudioProps) => {
 	const refTitle = useRef<HTMLDivElement | null>(null);
 	const [, setIsReady] = useState(false);
 	const [duration, setDuration] = useState(0);
+	const [currentTime, setCurrentTime] = useState(0);
 	const [currentProgress, setCurrentProgress] = useState(0);
 	const [buffered, setBuffered] = useState(0);
 	const durationDisplay = formatDurationDisplay(duration);
-	const elapsedDisplay = formatDurationDisplay(currentProgress);
+	const elapsedDisplay = formatDurationDisplay(
+		online ? currentTime : currentProgress,
+	);
 	const [volume, setVolume] = useState(50);
 	const { width = window.innerWidth } = useWindowSize();
-
 	const handleBufferProgress: React.ReactEventHandler<HTMLAudioElement> = (
 		e,
 	) => {
 		const audio = e.currentTarget;
 		const dur = audio.duration;
-		if (dur > 0) {
-			for (let i = 0; i < audio.buffered.length; i++) {
-				if (
-					audio.buffered.start(audio.buffered.length - 1 - i) <
-					audio.currentTime
-				) {
-					const bufferedLength = audio.buffered.end(
-						audio.buffered.length - 1 - i,
-					);
-					setBuffered(bufferedLength);
-					break;
+		if (online) {
+			setCurrentTime(audio.currentTime);
+		} else {
+			if (dur > 0) {
+				for (let i = 0; i < audio.buffered.length; i++) {
+					if (
+						audio.buffered.start(audio.buffered.length - 1 - i) <
+						audio.currentTime
+					) {
+						const bufferedLength = audio.buffered.end(
+							audio.buffered.length - 1 - i,
+						);
+						setBuffered(bufferedLength);
+						break;
+					}
 				}
 			}
 		}
@@ -71,7 +83,9 @@ export const Audio = ({ src, title, onSetAudio, download }: IAudioProps) => {
 
 	const onMute = () => {
 		if (refAudio.current) {
-			setVolume(volume === 0 ? 100 : 0);
+			// const val = volume;
+			// setVolume(val === 0 ? 0 : 100);
+			// refAudio.current.volume = val === 0 ? 0 : 1;
 		}
 	};
 
@@ -98,20 +112,22 @@ export const Audio = ({ src, title, onSetAudio, download }: IAudioProps) => {
 	return (
 		<div className={`audio ${isPlay ? 'active' : ''}`}>
 			<audio
-				preload="metadata"
+				preload={!online ? 'metadata' : undefined}
 				ref={refAudio}
 				controls={false}
 				src={src}
 				onPlaying={() => setPlay(true)}
 				onPause={() => setPlay(false)}
-				onDurationChange={(e) => setDuration(e.currentTarget.duration)}
+				onDurationChange={(e) => {
+					setDuration(e.currentTarget.duration);
+				}}
 				onCanPlay={(e) => {
 					e.currentTarget.volume = 1;
 					setIsReady(true);
 				}}
 				onTimeUpdate={(e) => {
 					setCurrentProgress(e.currentTarget.currentTime);
-					handleBufferProgress(e);
+					!online && handleBufferProgress(e);
 				}}
 				onProgress={handleBufferProgress}
 			></audio>
@@ -179,18 +195,27 @@ export const Audio = ({ src, title, onSetAudio, download }: IAudioProps) => {
 						<TimeAudio
 							currentTime={elapsedDisplay}
 							duration={durationDisplay}
-							isDuration={width >= 768}
+							isDuration={!online}
 						/>
 					</div>
 					<div className="audio-footer">
 						<ProgressBar
-							duration={duration}
+							duration={online ? currentTime : duration}
 							currentProgress={currentProgress}
 							buffered={buffered}
+							online={online}
 							onChange={(e) => {
 								if (!refAudio.current) return;
-								refAudio.current.currentTime = e.currentTarget.valueAsNumber;
-								setCurrentProgress(e.currentTarget.valueAsNumber);
+								if (!online) {
+									refAudio.current.currentTime = e.currentTarget.valueAsNumber;
+									setCurrentProgress(e.currentTarget.valueAsNumber);
+								}
+								//TODO: НУЖНО СДЕЛАТЬ КАК В ДЕФОЛТНОМ
+								// else {
+								// 	// refAudio.current.currentTime =
+								// 	// 	(e.currentTarget.valueAsNumber * 10 * currentTime) / 100;
+								// 	// setCurrentProgress(e.currentTarget.valueAsNumber);
+								// }
 							}}
 						/>
 					</div>
@@ -200,26 +225,28 @@ export const Audio = ({ src, title, onSetAudio, download }: IAudioProps) => {
 					value={volume}
 					onMute={onMute}
 				/>
-				<button className="audio-links__btn">
-					<DotsHorizontalIcon />
-					<div className="audio-links">
-						{download.map((item, index) => (
-							<a
-								href={item.link}
-								target="_blank"
-								rel="noflow, noindex noreferrer"
-								key={index}
-							>
-								<img
-									src={item.icon}
-									alt=""
-									className="audio-links__item-icon"
-									loading="lazy"
-								/>
-							</a>
-						))}
-					</div>
-				</button>
+				{download && (
+					<button className="audio-links__btn">
+						<DotsHorizontalIcon />
+						<div className="audio-links">
+							{download.map((item, index) => (
+								<a
+									href={item.link}
+									target="_blank"
+									rel="noflow, noindex noreferrer"
+									key={index}
+								>
+									<img
+										src={item.icon}
+										alt=""
+										className="audio-links__item-icon"
+										loading="lazy"
+									/>
+								</a>
+							))}
+						</div>
+					</button>
+				)}
 			</div>
 			{isContentOverflow && (
 				<Tooltip

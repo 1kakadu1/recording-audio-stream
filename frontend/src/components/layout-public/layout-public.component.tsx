@@ -6,7 +6,7 @@ export const LayoutPublic = ({ children }: { children: ReactNode }) => {
 	return (
 		<div>
 			<Header />
-			<div className={cl.root}>
+			<div className={cl.root + ' container'}>
 				<main>{children}</main>
 			</div>
 		</div>

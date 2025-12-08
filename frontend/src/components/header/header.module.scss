@@ -1,8 +1,30 @@
-.header{
-    background-color: var(--header);
-    height: var(--height-header);
-    width: 100%;
-    position: sticky;
-    top: 0px;
-    border-bottom: 1px solid var(--hr);
+.header {
+	background-color: var(--header);
+	height: var(--height-header);
+	width: 100%;
+	position: sticky;
+	top: 0px;
+	border-bottom: 1px solid var(--hr);
+	& > div {
+		height: 100%;
+	}
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	height: 100%;
+	a {
+		text-decoration: none;
+		font-size: toRem(18);
+		transition: color 300ms ease;
+		&.active {
+			color: var(--yellow);
+		}
+		@include hover {
+			transition: color 300ms ease;
+			color: var(--hover);
+		}
+	}
 }

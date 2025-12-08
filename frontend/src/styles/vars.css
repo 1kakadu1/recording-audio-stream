@@ -5,17 +5,17 @@
 	--light-blue: #019fcc;
 	--light-blue-02: rgba(1, 159, 204, 0.2);
 	--dark: #000;
-	--ds-dark: hsla( 0, 0%, 4%);
+	--ds-dark: rgba(194, 208, 251, 0.2);
 	--dark-blue: #014b62;
 	--background: var(--dark);
 	--background-secondary: var(--ds-dark);
 	--footer: #333;
 	--white: #fff;
-	--gray: #ccc;
+	--gray: #888;
 	--gray-secondary: #999;
 	--blue-08: rgba(1, 159, 204, 0.08);
 	--blue-light-80: rgba(21, 87, 132, 0.8);
-	--primary: #333;
+	--primary: var(--white);
 	--primary-hover: #696a75;
 	--secondary: var(--dark-blue);
 	--secondary-hover: #696a75;
@@ -30,31 +30,33 @@
 	--text-text-secondary: #616161;
 	--text-accent: #004f6d;
 	--text-secondary: var(--gray-secondary);
-	--hr: #fafafa;
-	--link: #333;
-	--hover: #019fcc;
+	--hr: rgba(194, 208, 251, 0.2);
+	--link: var(--white);
+	--hover: var(--yellow);
 	--modal: var(--white);
 	--overlay: rgba(0, 0, 0, 0.3);
 	--z-index-header: 2000;
 	--header-height: 68px;
 	--header-too-height: 0px;
 	--mobile-product-action-height: 80px;
-	--yellow: #ffba08;
+	--yellow: #e8cf36;
 	--surface-light: #fafafa;
 	--header: var(--background-secondary);
 	--height-header: 60px;
 	/* END BASE */
 	/* BTN */
-	--btn: var(--dark-blue);
+	--btn: var(--ds-dark);
 	--btn-text: var(--white);
-	--btn-hover: var(--dark-blue);
-	--btn-disabled: var(--dark-blue);
+	--btn-hover: var(--yellow);
+	--btn-disabled: var(--gray);
+	--btn-border: var(--ds-dark);
+	--btn-border-hover: var(--yellow);
 	/*---------*/
 	/* END BTNS */
 	/* INPUTS */
-	--input: var(--white);
-	--input-border: var(--white);
-	--input-label: var(--gray-secondary);
+	--input: var(--ds-dark);
+	--input-border: var(--ds-dark);
+	--input-label: var(--white);
 	--input-placeholder: var(--gray-secondary);
 	--input-text: var(--primary);
 	/* END INPUTS */

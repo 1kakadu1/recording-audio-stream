@@ -2,9 +2,12 @@ import { type ChangeEvent, useState } from 'react';
 import { LayoutPublic } from '@/components/layout-public';
 import { Button, InputField } from '@/components/ui';
 import Audio from '../../components/audio';
+import cl from './home.module.scss';
 
 export const HomePage = () => {
-	const [link, setLink] = useState('');
+	const [link, setLink] = useState(
+		'https://traxx011.ice.infomaniak.ch/traxx011-low.mp3',
+	);
 	const [error, setError] = useState<null | string>(null);
 	const [audio, setAudio] = useState<null | HTMLAudioElement>(null);
 	const [currentAudioLink, setCurrentAudioLink] = useState('');
@@ -18,6 +21,7 @@ export const HomePage = () => {
 
 	const onSetLink = () => {
 		if (link.includes('http') && link.includes('.mp3')) {
+			setError(null);
 			setCurrentAudioLink(link);
 		} else {
 			setError('Invalid link');
@@ -30,21 +34,26 @@ export const HomePage = () => {
 
 	return (
 		<LayoutPublic>
-			<div>
+			<div className={cl.search}>
 				<InputField
 					value={link}
 					onChange={onChangeLink}
+					placeholder="Ссылка на файл"
+					hideErrorText
 				/>
 				<Button onClick={onSetLink}>OK</Button>
-				{error && <h5>{error}</h5>}
+				{error && <span className={cl.error}>{error}</span>}
 			</div>
+
 			{currentAudioLink && error === null && (
-				<Audio
-					src="https://traxx011.ice.infomaniak.ch/traxx011-low.mp3"
-					title={'traxx011.ice.infomaniak.ch/traxx011-low'}
-					onSetAudio={onChangeAudio}
-					download={[]}
-				/>
+				<div className={cl.audio__wrap}>
+					<Audio
+						src="https://traxx011.ice.infomaniak.ch/traxx011-low.mp3"
+						title={'traxx011.ice.infomaniak.ch/traxx011-low'}
+						onSetAudio={onChangeAudio}
+						online
+					/>
+				</div>
 			)}
 		</LayoutPublic>
 	);

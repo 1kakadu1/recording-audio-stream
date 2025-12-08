@@ -2,6 +2,7 @@ export interface IAudioProgressBarProps extends React.ComponentPropsWithoutRef<'
 	duration: number;
 	currentProgress: number;
 	buffered: number;
+	online?: boolean;
 }
 
 export interface IVolumeProps extends React.ComponentPropsWithoutRef<'input'> {
@@ -21,5 +22,6 @@ export interface IAudioProps {
 	src: string;
 	title: string;
 	onSetAudio: (audio: HTMLAudioElement | null) => void;
-	download: { link: string; icon: string }[];
+	download?: { link: string; icon: string }[];
+	online?: boolean;
 }

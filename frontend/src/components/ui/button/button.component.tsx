@@ -15,13 +15,13 @@ export interface IButtonLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorE
 	children: ReactNode;
 	disabled?: boolean;
 	href: string;
-	variant?: 'fluid' | 'outline' | 'fluid-white' | 'fluid-dark' | 'fluid-blue';
+	variant?: 'fluid';
 }
 
 export const ButtonLink = ({
 	children,
 	className = '',
-	variant = 'fluid-white',
+	variant = 'fluid',
 	href,
 	...props
 }: IButtonLinkProps) => {
@@ -32,7 +32,6 @@ export const ButtonLink = ({
 			to={href}
 			{...props}
 		>
-			<span className={cl.bg} />
 			<span className={cl.content}>{children}</span>
 		</Link>
 	);
@@ -56,7 +55,6 @@ export const Button = ({
 			disabled={disabled}
 			{...props}
 		>
-			<span className={cl.bg} />
 			<span className={cl.content}>{children}</span>
 		</button>
 	);
