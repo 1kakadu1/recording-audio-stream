@@ -1,16 +1,29 @@
-import { type ChangeEvent, useState } from 'react';
+import { useAudioStore } from '@/stores/audio.store';
+import { type ChangeEvent, useMemo } from 'react';
 import { LayoutPublic } from '@/components/layout-public';
 import { Button, InputField } from '@/components/ui';
 import Audio from '../../components/audio';
 import cl from './home.module.scss';
 
-export const HomePage = () => {
-	const [link, setLink] = useState(
-		'https://traxx011.ice.infomaniak.ch/traxx011-low.mp3',
-	);
-	const [error, setError] = useState<null | string>(null);
-	const [audio, setAudio] = useState<null | HTMLAudioElement>(null);
-	const [currentAudioLink, setCurrentAudioLink] = useState('');
+const createTitle = (url: string) => {
+	const u = new URL(url);
+	const host = u.host;
+	const path = u.pathname.replace(/\.mp3$/, '');
+
+	return host + path;
+};
+
+const useAudioHook = () => {
+	const {
+		audio,
+		link,
+		error,
+		currentAudioLink,
+		setAudio,
+		setCurrentAudioLink,
+		setLink,
+		setError,
+	} = useAudioStore();
 
 	const onChangeAudio = (value: null | HTMLAudioElement) => {
 		if (value && audio) {
@@ -32,6 +45,39 @@ export const HomePage = () => {
 		setLink(value);
 	};
 
+	const title = useMemo(() => {
+		if (audio && currentAudioLink) {
+			return createTitle(currentAudioLink);
+		}
+
+		return '';
+	}, [audio, currentAudioLink]);
+
+	return {
+		title,
+		audio,
+		link,
+		error,
+		currentAudioLink,
+		setAudio,
+		setCurrentAudioLink,
+		setLink,
+		setError,
+		onChangeAudio,
+		onSetLink,
+		onChangeLink,
+	};
+};
+
+export const HomePage = () => {
+	const {
+		link,
+		error,
+		currentAudioLink,
+		onChangeAudio,
+		onSetLink,
+		onChangeLink,
+	} = useAudioHook();
 	return (
 		<LayoutPublic>
 			<div className={cl.search}>
@@ -48,7 +94,7 @@ export const HomePage = () => {
 			{currentAudioLink && error === null && (
 				<div className={cl.audio__wrap}>
 					<Audio
-						src="https://traxx011.ice.infomaniak.ch/traxx011-low.mp3"
+						src={currentAudioLink}
 						title={'traxx011.ice.infomaniak.ch/traxx011-low'}
 						onSetAudio={onChangeAudio}
 						online
