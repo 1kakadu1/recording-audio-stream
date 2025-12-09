@@ -1,8 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 import cl from './header.module.scss';
+import { useAudioStore } from '@/stores/audio.store';
 
 export const Header = () => {
 	const { pathname } = useLocation();
+	const { isRecorder } = useAudioStore();
 	return (
 		<header className={cl.header}>
 			<div className="container">
@@ -11,7 +13,8 @@ export const Header = () => {
 						to="/"
 						className={pathname === '/' ? cl.active : ''}
 					>
-						Запись
+						Record
+						{isRecorder && <span className={cl.recorder}></span>}
 					</Link>
 					<Link
 						to="/about"

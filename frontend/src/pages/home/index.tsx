@@ -1,5 +1,5 @@
 import { useAudioStore } from '@/stores/audio.store';
-import { type ChangeEvent, useMemo } from 'react';
+import { type ChangeEvent, useCallback, useEffect, useMemo } from 'react';
 import { LayoutPublic } from '@/components/layout-public';
 import { Button, InputField } from '@/components/ui';
 import Audio from '../../components/audio';
@@ -23,7 +23,20 @@ const useAudioHook = () => {
 		setCurrentAudioLink,
 		setLink,
 		setError,
+		fetchRecorderStart,
+		fetchRecorderStop,
+		fetchRecorderStatus,
+		isRecorder,
+		setIsRecorder
 	} = useAudioStore();
+
+	const title = useMemo(() => {
+		if (audio && currentAudioLink) {
+			return createTitle(currentAudioLink);
+		}
+
+		return '';
+	}, [audio, currentAudioLink]);
 
 	const onChangeAudio = (value: null | HTMLAudioElement) => {
 		if (value && audio) {
@@ -45,13 +58,29 @@ const useAudioHook = () => {
 		setLink(value);
 	};
 
-	const title = useMemo(() => {
-		if (audio && currentAudioLink) {
-			return createTitle(currentAudioLink);
-		}
+	const onStartRecord = useCallback(()=>{
+		fetchRecorderStart(currentAudioLink, title);
+	}, [title, currentAudioLink, audio])
 
-		return '';
-	}, [audio, currentAudioLink]);
+	const onStopRecord = () =>{
+		fetchRecorderStop();
+	}
+
+	const onGetStatusProgress = (init?: boolean)=>{
+		fetchRecorderStatus().then((res)=>{
+			if(init){
+				setIsRecorder(res.recording);
+			}
+		})
+	}
+
+	useEffect(()=>{
+		if(!isRecorder){
+			onGetStatusProgress(true);
+		}
+	}, [])
+
+
 
 	return {
 		title,
@@ -66,6 +95,10 @@ const useAudioHook = () => {
 		onChangeAudio,
 		onSetLink,
 		onChangeLink,
+		onStartRecord,
+		onStopRecord,
+		onGetStatusProgress,
+		isRecorder
 	};
 };
 
@@ -77,6 +110,10 @@ export const HomePage = () => {
 		onChangeAudio,
 		onSetLink,
 		onChangeLink,
+		onStartRecord,
+		onStopRecord,
+		onGetStatusProgress,
+		isRecorder
 	} = useAudioHook();
 	return (
 		<LayoutPublic>
@@ -92,13 +129,23 @@ export const HomePage = () => {
 			</div>
 
 			{currentAudioLink && error === null && (
-				<div className={cl.audio__wrap}>
-					<Audio
-						src={currentAudioLink}
-						title={'traxx011.ice.infomaniak.ch/traxx011-low'}
-						onSetAudio={onChangeAudio}
-						online
-					/>
+				<div>
+					<div className={cl.audio__wrap}>
+						<Audio
+							src={currentAudioLink}
+							title={'traxx011.ice.infomaniak.ch/traxx011-low'}
+							onSetAudio={onChangeAudio}
+							online
+						/>
+					</div>
+					<div className={cl.actions}>
+						<Button disabled={isRecorder} onClick={onStartRecord}>Start</Button>
+						<Button  disabled={!isRecorder} onClick={onStopRecord}>Stop</Button>
+						<Button  onClick={()=>onGetStatusProgress()}>
+							Status Progress
+							{isRecorder && <span className={cl.recorder}></span>}
+						</Button>
+					</div>
 				</div>
 			)}
 		</LayoutPublic>
